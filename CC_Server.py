@@ -1,8 +1,9 @@
-import makeJson
+import json1
 import socket
 import sys
+import requests
 
-def connectionmake(port, serverIP, jsonmsg):
+def cclistener(port, serverIP,):
 
     try:
         s = socket.socket()
@@ -31,9 +32,7 @@ def connectionmake(port, serverIP, jsonmsg):
 
             c, addr = s.accept()
             print('Got connection from', addr)
-            #send json string
-            c.send(jsonmsg.encode())
-            print('Sending json message to client', jsonmsg)
+
         finally:
             # Close the connection with the client
             c.close()
@@ -41,8 +40,32 @@ def connectionmake(port, serverIP, jsonmsg):
 
     return
 
-IP = ''
-PORT = 8090
-POST = makeJson.makeJson()
 
-connectionmake(PORT, IP, POST)
+def ccserverpost(url, data):
+
+    headers = {'content-type': 'application/json'}
+    response = requests.post(url, data=data, headers=headers)
+    if response.status_code == 200:
+        print("ok" , response.status_code)
+
+    elif response.status_code == 404:
+        print("not found!" , response.status_code)
+
+    elif response.status_code == 418:
+        print("I'm a teapot" , response.status_code)
+
+    elif response.status_code == 500:
+        print("Internal error" , response.status_code)
+
+    elif response.status_code == 501:
+        print("not Implemented" , response.status_code)
+
+
+    return response.content
+
+jsondata = json1.encodejson()
+port = 8091
+serverip = '172.17.0.2'
+url = 'http://localhost:8091/v1.0/aanmelden/'
+postdata = ccserverpost(url,jsondata)
+print postdata

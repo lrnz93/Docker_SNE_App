@@ -1,13 +1,15 @@
-from class_networking import Networking
+from class_ccnetworking import Ccnetworking
 import class_json
+import class_hostip
 
 
 def main():
 
     data = class_json.encodejson()
-    network = Networking(8000, '127.0.0.1', 'http://localhost:8091/v1.0/aanmelden/')
-    ip, port = network.get_peers_ip(data)
-    print (ip)
+    hostip = (class_hostip.getownip())
+    ccserver = Ccnetworking(8091, hostip, 'http://localhost:8091/v1.0/aanmelden/')
+    ip, port = ccserver.get_peers_ip(data)
+    print(ip)
     print(port)
 
 main()

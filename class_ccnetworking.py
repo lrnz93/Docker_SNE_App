@@ -3,7 +3,7 @@ import sys
 import class_json
 
 
-class Networking:
+class Ccnetworking:
     def __init__(self, port, ip, url):
         self._port = port
         self._serverip = ip
@@ -11,6 +11,7 @@ class Networking:
 
     def __get_server_response(self, headers, data):
         response = requests.post(self._url, data=data, headers=headers)
+
         if response.status_code == 200:
             print("ok response code", response.status_code)
 

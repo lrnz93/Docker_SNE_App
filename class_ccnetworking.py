@@ -6,7 +6,7 @@ import class_json
 class Ccnetworking:
     def __init__(self, port, ip, url):
         self._port = port
-        self._serverip = ip
+        self._ip = ip
         self._url = url
 
     def __get_server_response(self, headers, data):
@@ -43,4 +43,6 @@ class Ccnetworking:
             return ip, port
         else:
             print('serverresponse was empty')
+            sys.exit()
             return None
+

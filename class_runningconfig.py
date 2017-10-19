@@ -5,7 +5,7 @@ class RunningConfig:
 
     instance = None
 
-    def __init__(self, key=None, value=None):
+    def __init__(self):
         if not RunningConfig.instance:
             RunningConfig.instance = RunningConfig.__RunningConfig()
 
